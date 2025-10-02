@@ -1,4 +1,4 @@
-name: CI — Cache Prime Example
+name: Cache Prime Minimal
 
 on:
   push:
@@ -12,23 +12,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Use Node.js 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Restore npm cache
+      - name: Restore dummy cache
         id: cache-deps
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: ~/.dummy-cache
           key: cache-03e1cf5
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: prime-cache-03e1cf5
         run: echo "Cache hit? ${{ steps.cache-deps.outputs.cache-hit }}"
-
-      - name: Run tests
-        run: npm test
